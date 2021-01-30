@@ -12,15 +12,14 @@ modules:
   - name: nim
     sources: 
       - type: archive
-        url: https://nim-lang.org/download/nim-1.4.2.tar.xz
-        sha256: 03a47583777dd81380a3407aa6a788c9aa8a67df4821025770c9ac4186291161
+        url: https://nim-lang.org/download/nim-1.4.2-linux_x64.tar.xz
+        sha256: 55f22b2d6754721a8a1473e20bc3e49ffd9b073f0c14b53df40afb12e26d621e
         dest: nim_sdk
     buildsystem: simple
     cleanup:
       - "*"
     build-commands:
       - mkdir -p /app/lib/sdk/nim
-      - cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd ..
       - cp -r nim_sdk/* /app/lib/sdk/nim
       - chmod -R 755 /app/lib/sdk/nim/bin
   - name: invoicer
