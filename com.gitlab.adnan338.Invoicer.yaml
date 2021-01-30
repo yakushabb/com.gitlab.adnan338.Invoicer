@@ -27,12 +27,12 @@ modules:
     sources: 
       - type: git
         url: https://gitlab.com/9898287/invoicer.git
-        commit: e4666b67b536f74f5c99bdfb260981f42e32f8e3
-        tag: "1.0.0"
+        commit: 17b96741d13e8da34510ba3bebe9929fb25f5019
+        tag: "1.1.0"
     buildsystem: simple
     build-commands:
       - nimble build --gc:arc --d:release --threads:on
       - install -Dm755 bin/* -t /app/bin
       - install -Dm644 resources/com.gitlab.adnan338.Invoicer.svg -t /app/share/icons/hicolor/scalable/apps
       - install -Dm644 resources/com.gitlab.adnan338.Invoicer.desktop -t /app/share/applications
-      - install -Dm644 resources/com.gitlab.adnan338.Invoicer.metainfo.xml /app/share/metainfo/com.gitlab.adnan338.Invoicer.metainfo.xml
+      - install -Dm644 resources/com.gitlab.adnan338.Invoicer.metainfo.xml -t /app/share/metainfo
