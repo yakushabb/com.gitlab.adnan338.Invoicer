@@ -19,9 +19,12 @@ modules:
     cleanup:
       - "*"
     build-commands:
-      - if [ $(uname -m) == "x86_64" ]; then mkdir -p /app/lib/sdk/nim; fi
-      - if [ $(uname -m) == "x86_64" ]; then cp -r nim_sdk_amd64/* /app/lib/sdk/nim; fi
-      - if [ $(uname -m) == "x86_64" ]; then chmod -R 755 /app/lib/sdk/nim/bin; fi
+      - >
+          if [ $(uname -m) == "x86_64" ]; then 
+            mkdir -p /app/lib/sdk/nim
+            cp -r nim_sdk_amd64/* /app/lib/sdk/nim
+            chmod -R 755 /app/lib/sdk/nim/bin; 
+          fi
   - name: nim_source_generic
     sources: 
       - type: archive
@@ -32,10 +35,13 @@ modules:
     cleanup:
       - "*"
     build-commands:
-      - if [ $(uname -m) != "x86_64" ]; then mkdir -p /app/lib/sdk/nim; fi
-      - if [ $(uname -m) != "x86_64" ]; then cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd .. ; fi
-      - if [ $(uname -m) != "x86_64" ]; then cp -r nim_sdk/* /app/lib/sdk/nim; fi
-      - if [ $(uname -m) != "x86_64" ]; then chmod -R 755 /app/lib/sdk/nim/bin; fi
+      - >
+          if [ $(uname -m) != "x86_64" ]; then 
+            mkdir -p /app/lib/sdk/nim
+            cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd .. 
+            cp -r nim_sdk/* /app/lib/sdk/nim
+            chmod -R 755 /app/lib/sdk/nim/bin; 
+          fi
   - name: invoicer
     sources: 
       - type: git
