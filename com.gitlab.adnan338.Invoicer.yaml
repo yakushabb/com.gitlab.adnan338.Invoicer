@@ -9,7 +9,23 @@ finish-args:
 build-options:
   append-path: /app/lib/sdk/nim/bin
 modules:
-  - name: nim
+  - name: nim_amd64
+    sources: 
+      - type: archive
+        url: https://nim-lang.org/download/nim-1.4.2-linux_x64.tar.xz
+        sha256: 55f22b2d6754721a8a1473e20bc3e49ffd9b073f0c14b53df40afb12e26d621e
+        dest: nim_sdk_amd64
+    buildsystem: simple
+    cleanup:
+      - "*"
+    build-commands:
+      - >
+          if [ $(uname -m) == "x86_64" ]; then 
+            mkdir -p /app/lib/sdk/nim
+            cp -r nim_sdk_amd64/* /app/lib/sdk/nim
+            chmod -R 755 /app/lib/sdk/nim/bin; 
+          fi
+  - name: nim_source_generic
     sources: 
       - type: archive
         url: https://nim-lang.org/download/nim-1.4.2.tar.xz
@@ -19,10 +35,13 @@ modules:
     cleanup:
       - "*"
     build-commands:
-      - mkdir -p /app/lib/sdk/nim
-      - cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd ..
-      - cp -r nim_sdk/* /app/lib/sdk/nim
-      - chmod -R 755 /app/lib/sdk/nim/bin
+      - >
+          if [ $(uname -m) != "x86_64" ]; then 
+            mkdir -p /app/lib/sdk/nim
+            cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd .. 
+            cp -r nim_sdk/* /app/lib/sdk/nim
+            chmod -R 755 /app/lib/sdk/nim/bin; 
+          fi
   - name: invoicer
     sources: 
       - type: git
