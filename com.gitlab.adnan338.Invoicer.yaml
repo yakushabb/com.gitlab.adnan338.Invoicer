@@ -1,6 +1,6 @@
 id: com.gitlab.adnan338.Invoicer
 runtime: org.gnome.Platform
-runtime-version: "3.38"
+runtime-version: "42"
 sdk: org.gnome.Sdk
 command: invoicer
 finish-args:
@@ -10,7 +10,7 @@ build-options:
   append-path: /app/lib/sdk/nim/bin
 modules:
   - name: nim_amd64
-    sources: 
+    sources:
       - type: archive
         url: https://nim-lang.org/download/nim-1.4.2-linux_x64.tar.xz
         sha256: 55f22b2d6754721a8a1473e20bc3e49ffd9b073f0c14b53df40afb12e26d621e
@@ -20,13 +20,13 @@ modules:
       - "*"
     build-commands:
       - >
-          if [ $(uname -m) == "x86_64" ]; then 
+          if [ $(uname -m) == "x86_64" ]; then
             mkdir -p /app/lib/sdk/nim
             cp -r nim_sdk_amd64/* /app/lib/sdk/nim
-            chmod -R 755 /app/lib/sdk/nim/bin; 
+            chmod -R 755 /app/lib/sdk/nim/bin;
           fi
   - name: nim_source_generic
-    sources: 
+    sources:
       - type: archive
         url: https://nim-lang.org/download/nim-1.4.2.tar.xz
         sha256: 03a47583777dd81380a3407aa6a788c9aa8a67df4821025770c9ac4186291161
@@ -36,14 +36,14 @@ modules:
       - "*"
     build-commands:
       - >
-          if [ $(uname -m) != "x86_64" ]; then 
+          if [ $(uname -m) != "x86_64" ]; then
             mkdir -p /app/lib/sdk/nim
-            cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd .. 
+            cd nim_sdk && sh build.sh && bin/nim c koch && ./koch boot -d:release && ./koch tools && cd ..
             cp -r nim_sdk/* /app/lib/sdk/nim
-            chmod -R 755 /app/lib/sdk/nim/bin; 
+            chmod -R 755 /app/lib/sdk/nim/bin;
           fi
   - name: invoicer
-    sources: 
+    sources:
       - type: git
         url: https://gitlab.com/9898287/invoicer.git
         commit: 17b96741d13e8da34510ba3bebe9929fb25f5019
