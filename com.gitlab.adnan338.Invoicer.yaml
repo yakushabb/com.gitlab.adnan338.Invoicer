@@ -1,6 +1,6 @@
 id: com.gitlab.adnan338.Invoicer
 runtime: org.gnome.Platform
-runtime-version: "42"
+runtime-version: "45"
 sdk: org.gnome.Sdk
 command: invoicer
 finish-args:
