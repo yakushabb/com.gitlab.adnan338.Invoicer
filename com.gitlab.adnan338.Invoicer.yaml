@@ -4,6 +4,8 @@ runtime-version: "42"
 sdk: org.gnome.Sdk
 command: invoicer
 finish-args:
+  - --device=dri
+  - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
 build-options:
