@@ -48,6 +48,8 @@ modules:
         url: https://gitlab.com/9898287/invoicer.git
         commit: 17b96741d13e8da34510ba3bebe9929fb25f5019
         tag: "1.1.0"
+      - type: patch
+        path: fix-appdata.patch
     buildsystem: simple
     build-commands:
       - nimble build --gc:arc --d:release --threads:on
